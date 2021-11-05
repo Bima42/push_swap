@@ -11,28 +11,28 @@ static void	clear(char **array, int i)
 
 int main(int argc, char **argv)
 {
-	char	**ret;
-	int	*tab_i;
+	char	**tmp;
+	int	*swap_a;
 	int	i = 0;
 	int	j = 0;
 
-	(void)ret;
-	(void)tab_i;
 	if (argc == 2)
 	{
-		ret = ft_split(argv[1], ' ');
-		while (ret[i])
+		tmp = ft_split(argv[1], ' ');
+		if (!tmp)
+			return (0);
+		while (tmp[i])
 			i++;
-		tab_i = malloc(sizeof(int) * i);
-		if (!tab_i)
+		swap_a = malloc(sizeof(int) * i);
+		if (!swap_a)
 			return (0);
 		while (j < i)
 		{
-			tab_i[j] = ft_atoi(ret[j]);
-			printf("tab_i[%d] = %d\n", j, tab_i[j]);
+			swap_a[j] = ft_atoi(tmp[j]);
+			printf("swap_a[%d] = %d\n", j, swap_a[j]);
 			j++;
 		}
-		clear(ret, i);
+		clear(tmp, i);
 	}
 	else
 		write (1, "error", 5);

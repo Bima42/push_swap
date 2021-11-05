@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	int	*swap_a;
 	int	i = 0;
 	int	j = 0;
+	int	k = 1;
 
 	if (argc == 2)
 	{
@@ -33,6 +34,22 @@ int main(int argc, char **argv)
 			j++;
 		}
 		clear(tmp, i);
+	}
+	else if (argc > 2)
+	{
+		while (argv[i])
+			i++;
+		i -= 1;
+		swap_a = malloc(sizeof(int) * i);
+		if (!swap_a)
+			return (0);
+		while (j < i)
+		{
+			swap_a[j] = ft_atoi(argv[k]);
+			printf("swap_a[%d] = %d\n", j, swap_a[j]);
+			j++;
+			k++;
+		}
 	}
 	else
 		write (1, "error", 5);

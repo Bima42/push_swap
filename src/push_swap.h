@@ -11,4 +11,6 @@ int     *parsing_string(char **argv);
 int     *parsing_multi_args(char **argv);
 int     *parsing_args(int argc, char **argv);
 
+void    swap(int *stack);
+
 #endif

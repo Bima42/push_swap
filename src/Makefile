@@ -1,6 +1,6 @@
 SRCS	=
 
-MAIN	=	push_swap.c push_swap_parsing.c
+MAIN	=	push_swap.c push_swap_parsing.c push_swap_tools.c
 
 HEADERS	= 	../libft/libft.a push_swap.h
 

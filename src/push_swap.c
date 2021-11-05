@@ -2,9 +2,8 @@
 
 int main(int argc, char **argv)
 {
-	int	*swap_a;
+	int	*a;
 
-	swap_a = parsing_args(argc, argv);
-	(void)swap_a;
+	a = parsing_args(argc, argv);
 	return (0);
 }

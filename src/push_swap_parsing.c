@@ -1,66 +1,91 @@
 #include "push_swap.h"
 
-void	clear(char **array, int i)
+void   display(t_stack *a)
 {
-        while (i-- > 0)
-                free(array[i]);
-        free(array);
-        return ;
+        t_node  *temp;
+
+        if (a->front == NULL)
+        {
+                write(1, "\nStack Overflow", 15);
+        }
+        else
+        {
+                temp = a->front;
+                while (temp != NULL)
+                {
+                        printf("%d\n", temp->data);
+                        temp = temp->next;
+                }
+        }
 }
 
-int	*parsing_string(char **argv)
+t_stack *parsing_string(char **argv)
 {
-        char    **tmp;
+        t_stack *a;
+        t_node  *temp;
         int             i;
-        int             j;
-        int             *swap_a;
+        char    **tmp;
 
+        a = malloc(sizeof(t_stack));
+        a->front = NULL;
         i = 0;
-        j = -1;
         tmp = ft_split(argv[1], ' ');
         if (!tmp)
-                return (0);
+                        return (0);
         while (tmp[i])
-                i++;
-        swap_a = malloc(sizeof(int) * i);
-        if (!swap_a)
-                return (0);
-        while (++j < i)
-                swap_a[j] = ft_atoi(tmp[j]);
-        clear(tmp, i);
-        return (swap_a);
-}
-
-int	*parsing_multi_args(char **argv)
-{
-        int     i;
-        int     index_a;
-        int     index_args;
-        int     *swap_a;
-
-        i = 0;
-        index_a = 0;
-        index_args = 1;
-        while (argv[i])
-                i++;
+                        i++;
         i -= 1;
-        swap_a = malloc(sizeof(int) * i);
-        if (!swap_a)
-                return (0);
-        while (index_a < i)
-                swap_a[index_a++] = ft_atoi(argv[index_args++]);
-        return (swap_a);
+        while (i >= 0)
+        {
+                temp = malloc(sizeof(t_node));
+                temp->data = ft_atoi(tmp[i]);
+                if (a->front == NULL)
+                        temp->next = NULL;
+                else
+                        temp->next = a->front;
+                a->front = temp;
+                i--;
+        }
+        return (a);
 }
 
-int	*parsing_args(int argc, char **argv)
+t_stack *parsing_multi_args(char **argv)
 {
-        int     *a;
+        t_stack *a;
+        t_node  *temp;
+        int     i;
+
+        i = 1;
+        a = malloc(sizeof(t_stack));
+        a->front = NULL;
+		while (argv[i])
+			i++;
+		i -= 1;
+        while (i > 0)
+        {
+                temp = malloc(sizeof(t_node));
+                temp->data = ft_atoi(argv[i]);
+                if (a->front == NULL)
+                        temp->next = NULL;
+                else
+                        temp->next = a->front;
+                a->front = temp;
+                i--;
+        }
+        return (a);
+}
+
+t_stack *parsing_args(int argc, char **argv)
+{
 
         if (argc == 2)
-                a = parsing_string(argv);
+                return (parsing_string(argv));
         else if (argc > 2)
-                a = parsing_multi_args(argv);
+                return (parsing_multi_args(argv));
         else
-                write (1, "error", 5);
-        return (a);
+        {
+                write(1, "error\n", 6);
+                return (0);
+        }
+        return (0);
 }

@@ -6,10 +6,22 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
+typedef struct  s_node
+{
+    int data;
+    struct s_node *next;
+}               t_node;
+
+typedef struct   s_stack
+{
+    t_node  *front;
+}               t_stack;
+
 void    clear(char **array, int i);
-int     *parsing_string(char **argv);
-int     *parsing_multi_args(char **argv);
-int     *parsing_args(int argc, char **argv);
+void    display(t_stack *a);
+t_stack     *parsing_string(char **argv);
+t_stack     *parsing_multi_args(char **argv);
+t_stack     *parsing_args(int argc, char **argv);
 
 void    swap(int *stack);
 

@@ -45,35 +45,21 @@ void	push(t_stack *a, t_stack *b)
 {
 	t_node	*node_push;
 
-	if (b->front && a->front == NULL && a->tail == NULL)
+	node_push = malloc(sizeof(t_node));
+	node_push->data = a->front->data;
+	if (a->front)
 	{
-		node_push = malloc(sizeof(t_node));
-		node_push->data = b->front->data;
-		node_push->next = NULL;
-		a->front = node_push;
-		a->tail = node_push;
-		if (b->front->next)
-			b->front = b->front->next;
-		else
+		if (b->front == NULL)
 		{
-			b->front = NULL;
-			b->tail = NULL;
+			node_push->next = NULL;
+			b->tail = node_push;
 		}
-	}
-	else if (b->front && a->front == a->tail)
-	{
-		node_push = malloc(sizeof(t_node));
-		node_push->data = a->front->data;
-		node_push->next = a->front->next;
-		a->front->data = b->front->data;
-		a->front->next = node_push;
-		if (b->front->next)
-			b->front = b->front->next;
-		else
+		else if (b->front)
 		{
-			b->front = NULL;
-			b->tail = NULL;
+			node_push->next = b->front;
 		}
+		b->front = node_push;
+		a->front = a->front->next;
 	}
 	else
 		write(1, "Push impossible\n", 16);

@@ -12,13 +12,13 @@ int main(int argc, char **argv)
 	rotate(a);
 	display(a);
 	printf("-----\n");
-	push(b, a);
+	push(a, b);
 	display(a);
 	printf("-----\n");
 	display(b);
 	printf("-----\n");
 	printf("-----\n");
-	push(b, a);
+	push(a, b);
 	display(a);
 	printf("-----\n");
 	display(b);

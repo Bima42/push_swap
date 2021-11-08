@@ -15,17 +15,13 @@ int main(int argc, char **argv)
 	push(a, b);
 	display(a, b);
 
-	swap(a);
-	swap(b);
-	display(a, b);
-
 	swap_both(a, b);
 	display(a, b);
 
-	rotate(a);
-	rotate(b);
+	reverse_rotate(a);
+	reverse_rotate(b);
 	display(a, b);
 
-	rotate_both(a, b);
+	reverse_rotate_both(a, b);
 	display(a, b);
 }

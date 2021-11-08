@@ -99,15 +99,25 @@ void	rotate_both(t_stack *a, t_stack *b)
 
 void	reverse_rotate(t_stack *a)
 {
-	(void)a;
+	if (a->front != a->tail && a->front != NULL && a->tail != NULL)
+	{
+		a->tail->next = a->front;
+		a->front->prev = a->tail;
+		a->tail = a->tail->prev;
+		a->tail->next->prev = NULL;
+		a->tail->next = NULL;
+		a->front = a->front->prev;
+	}
+	else
+		return ;
 }
 
 void	reverse_rotate_both(t_stack *a, t_stack *b)
 {
 	if (a->front != a->tail && b->front != b->tail)
 	{
-		rotate(a);
-		rotate(b);
+		reverse_rotate(a);
+		reverse_rotate(b);
 	}
 	else
 		write(1, "Reverse rotate impossible\n", 26);

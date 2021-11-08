@@ -1,56 +1,27 @@
 #include "push_swap.h"
 
-t_stack *new_stack(void)
+void	clear(char **array)
 {
-        t_stack *new;
+	int	i;
+	i = 0;
 
-        new = malloc(sizeof(t_stack));
-        new->front = NULL;
-        new->tail = NULL;
-        return (new);
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }
 
-t_node  *new_node(int data)
+int	count_args(char **tmp)
 {
-        t_node  *new;
+	int i;
 
-        new = malloc(sizeof(t_node));
-        if (!new)
-                return (NULL);
-        new->data = data;
-        new->next = NULL;
-        new->prev = NULL;
-        return (new);
-}
-
-void    display(t_stack *a, t_stack *b)
-{
-        char    *stack_a;
-        char    *stack_b;
-        t_node  *node_a;
-        t_node  *node_b;
-
-        node_a = a->front;
-        node_b = b->front;
-        stack_a = "---A---";
-        stack_b = "---B---";
-        printf("%7s ||| %7s\n", stack_a, stack_b);
-        while (node_a != NULL && node_b != NULL)
-        {
-                printf("%7i ||| %7i\n", node_a->data, node_b->data);
-                node_a = node_a->next;
-                node_b = node_b->next;
-        }
-        while (node_a)
-        {
-                printf("%7i ||| XXXXXXX\n", node_a->data);
-                node_a = node_a->next;
-        }
-        while (node_b)
-        {
-                printf("XXXXXXX ||| %7i\n", node_b->data);
-                node_b = node_b->next;
-        }
+	i = 0;
+	while (tmp[i])
+		i++;
+	i -= 1;
+	return (i);
 }
 
 t_stack *parsing_string(char **argv)
@@ -61,13 +32,10 @@ t_stack *parsing_string(char **argv)
 	char    **tmp;
 
 	a = new_stack();
-	i = 0;
 	tmp = ft_split(argv[1], ' ');
 	if (!tmp)
 		return (0);
-	while (tmp[i])
-		i++;
-	i -= 1;
+	i = count_args(tmp);
 	while (i >= 0)
 	{
 		temp = new_node(ft_atoi(tmp[i]));
@@ -125,17 +93,4 @@ t_stack *parsing_args(int argc, char **argv)
                 return (0);
         }
         return (0);
-}
-
-void	clear(char **array)
-{
-	int	i;
-	i = 0;
-
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
 }

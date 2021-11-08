@@ -17,11 +17,4 @@ int main(int argc, char **argv)
 
 	swap_both(a, b);
 	display(a, b);
-
-	reverse_rotate(a);
-	reverse_rotate(b);
-	display(a, b);
-
-	reverse_rotate_both(a, b);
-	display(a, b);
 }

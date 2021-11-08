@@ -2,18 +2,17 @@
 
 void	swap(t_stack *a)
 {
-	t_node	*tmp;
+	int	tmp;
 
-	if (a->front && a->front->next)
+	tmp = 0;
+	if (a->front == a->tail || a->front == NULL)
+		return ;
+	else if (a->front && a->front->next)
 	{
-		tmp = malloc(sizeof(t_node));
-		tmp->data = a->front->next->data;
-		a->front->next->data = a->front->data;
-		a->front->data = tmp->data;
-		free(tmp);
+		tmp = a->front->data;
+		a->front->data = a->front->next->data;
+		a->front->next->data = tmp;
 	}
-	else
-		write(1, "Swap impossible\n", 16);
 }
 
 void	swap_both(t_stack *a, t_stack *b)
@@ -43,45 +42,48 @@ int	list_size(t_stack *a)
 
 void	push(t_stack *a, t_stack *b)
 {
-	t_node	*node_push;
-
-	node_push = malloc(sizeof(t_node));
-	node_push->data = a->front->data;
-	if (a->front)
+	if (a->front == NULL)
+		return ;
+	if (b->front == NULL && b->tail == NULL)
 	{
-		if (b->front == NULL)
-		{
-			node_push->next = NULL;
-			b->tail = node_push;
-		}
-		else if (b->front)
-		{
-			node_push->next = b->front;
-		}
-		b->front = node_push;
+		b->front = a->front;
+		b->tail = a->front;
 		a->front = a->front->next;
+		a->front->prev = NULL;
+		b->front->next = NULL;
 	}
-	else
-		write(1, "Push impossible\n", 16);
+	else if (b->front && b->tail && a->front->next)
+	{
+		b->front->prev = a->front;
+		a->front = a->front->next;
+		a->front->prev = NULL;
+		b->front->prev->next = b->front;
+		b->front = b->front->prev;
+	}
+	else if (!a->front->next)
+	{
+		b->front->prev = a->front;
+		a->front->next = b->front;
+		b->front = b->front->prev;
+		a->front = NULL;
+		a->tail = NULL;
+	}
 }
 
 
 void	rotate(t_stack *a)
 {
-	t_node	*tmp;
-
-	if (a->front != a->tail)
+	if (a->front != a->tail && a->front != NULL && a->tail != NULL)
 	{
-		tmp = malloc(sizeof(t_node));
-		tmp->data = a->front->data;
-		tmp->next = NULL;
-		tmp->prev = a->tail;
+		a->front->prev = a->tail;
+		a->tail->next = a->front;
 		a->front = a->front->next;
-		a->tail->next = tmp;
-		a->tail = tmp;
+		a->front->prev->next = NULL;
+		a->front->prev = NULL;
+		a->tail = a->tail->next;
 	}
 	else
-		write(1, "Rotate impossible\n", 18);
+		return ;
 }
 
 void	rotate_both(t_stack *a, t_stack *b)
@@ -97,21 +99,7 @@ void	rotate_both(t_stack *a, t_stack *b)
 
 void	reverse_rotate(t_stack *a)
 {
-	t_node	*tmp;
-
-	if (a->front != a->tail)
-	{
-		tmp = malloc(sizeof(t_node));
-		tmp->data = a->tail->data;
-		tmp->next = a->front;
-		tmp->prev = NULL;
-		a->tail = a->tail->prev;
-		a->tail->next = NULL;
-		a->front->prev = tmp;
-		a->front = tmp;
-	}
-	else
-		write(1, "Reverse rotate impossible\n", 26);
+	(void)a;
 }
 
 void	reverse_rotate_both(t_stack *a, t_stack *b)

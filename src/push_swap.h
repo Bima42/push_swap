@@ -20,7 +20,9 @@ typedef struct   s_stack
 }               t_stack;
 
 void    clear(char **array);
-void    display(t_stack *a);
+void    display(t_stack *a, t_stack *b);
+t_node  *new_node(int data);
+t_stack  *new_stack(void);
 t_stack     *parsing_string(char **argv);
 t_stack     *parsing_multi_args(char **argv);
 t_stack     *parsing_args(int argc, char **argv);

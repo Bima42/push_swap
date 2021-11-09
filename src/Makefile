@@ -1,7 +1,7 @@
 SRCS	=
 
 MAIN	=	push_swap.c push_swap_parsing.c create_elements.c \
-			commands_a.c commands_b.c commands_both.c
+			commands_a.c commands_b.c commands_both.c algorithm.c
 
 HEADERS	= 	../libft/libft.a push_swap.h
 

@@ -4,17 +4,16 @@ int main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
+	int	i;
 
+	i = 0;
 	a = parsing_args(argc, argv);
 	b = new_stack();
 
-	display(a, b);
-	push(a, b);
-	display(a, b);
-
-	push(a, b);
+	i = sort_checker(a);
+	printf("%d\n", i);
 	display(a, b);
 
-	swap_both(a, b);
-	display(a, b);
+	free(a);
+	free(b);
 }

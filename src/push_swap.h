@@ -48,4 +48,6 @@ void    swap_both(t_stack *a, t_stack *b);
 void    rotate_both(t_stack *a, t_stack *b);
 void    reverse_rotate_both(t_stack *a, t_stack *b);
 
+int sort_checker(t_stack *a);
+
 #endif

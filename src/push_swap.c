@@ -4,14 +4,11 @@ int main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int	i;
 
-	i = 0;
 	a = parsing_args(argc, argv);
 	b = new_stack();
 
-	i = sort_checker(a);
-	printf("%d\n", i);
+	sort_stack(a, b);
 	display(a, b);
 
 	free(a);

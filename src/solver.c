@@ -6,7 +6,7 @@ int	is_sorted(t_stack *a)
 
 	check = a->front;
 	if (a->front == NULL || a->tail == NULL)
-		return (0);
+		return (1);
 	while (check->next != NULL)
 	{
 		if (check->data < check->next->data)
@@ -23,7 +23,7 @@ int	is_reverse_sorted(t_stack *a)
 
 	check = a->front;
 	if (a->front == NULL || a->tail == NULL)
-		return (0);
+		return (1);
 	while (check->next != NULL)
 	{
 		if (check->data > check->next->data)
@@ -41,12 +41,18 @@ int	is_empty(t_stack *a)
 	return (0);
 }
 
+int	yvan_recursive(int data, int count, t_node *current_node)
+{
+	if (data < current_node->next->data)
+		return (yvan_recursive(data, count + 1, current_node->next));
+	return (count);
+}
+
 void	sort_stack(t_stack *a, t_stack *b)
 {
-	int	max_data_b;
-//	if (is_rev_sorted(a))
-//		while (!is_sorted(a))
-//			ra(a);
+	int	search_pos;
+	int	i;
+
 	while (!is_sorted(a))
 	{
 		while (!is_empty(a))
@@ -65,29 +71,30 @@ void	sort_stack(t_stack *a, t_stack *b)
 					if (a->front->data > a->tail->data)
 						rra(a);
 					else
-						push(a, b);
+						pb(a, b);
 				}
 			}
 			else
-				push(a, b);
+				pb(a, b);
 			if (!is_reverse_sorted(b))
 			{
 				if (b->front->data < b->tail->data)
-					rrb(b);
-				while (b->front->data < max_data_b && b->front->data > b->tail->data)
-				{
 					rb(b);
-					if (is_reverse_sorted(b))
-						break ;
-					sb(b);
+				else
+				{
+					i = 0;
+					search_pos = yvan_recursive(b->front->data, 0, b->front);
+					while (i++ < search_pos)
+					{
+						sb(b);
+						rb(b);
+					}
+					while (search_pos-- > 0)
+						rrb(b);
 				}
-				while (!is_reverse_sorted(b))
-					rrb(b);
 			}
-			if (!is_empty(b))
-				max_data_b = b->front->data;
 		}
 		while (!is_empty(b))
-			push(b, a);
+			pa(b, a);
 	}
 }

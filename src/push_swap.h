@@ -21,33 +21,37 @@ typedef struct   s_stack
 
 //Create elements
 void    display(t_stack *a, t_stack *b);
+int     list_size(t_stack *a);
 t_node  *new_node(int data);
 t_stack  *new_stack(void);
-int     list_size(t_stack *a);
 
 //Parsing
+void    clear(char **array);
+int     count_args(char **tmp);
 t_stack     *parsing_string(char **argv);
 t_stack     *parsing_multi_args(char **argv);
 t_stack     *parsing_args(int argc, char **argv);
-void    clear(char **array);
-int     count_args(char **tmp);
 
 //Command A
 void    sa(t_stack *a);
 void    ra(t_stack *a);
 void    rra(t_stack *a);
+void    pa(t_stack *a, t_stack *b);
 
 //Command B
 void    sb(t_stack *b);
 void    rb(t_stack *);
 void    rrb(t_stack *b);
+void    pb(t_stack *b, t_stack *a);
 
 //Command Both
-void    push(t_stack *a, t_stack *b);
+void    front_tail_null(t_stack *a);
 void    swap_both(t_stack *a, t_stack *b);
 void    rotate_both(t_stack *a, t_stack *b);
 void    reverse_rotate_both(t_stack *a, t_stack *b);
 
+//Solver
+int     yvan_recursive(int data, int count, t_node *current_node);
 int     is_sorted(t_stack *a);
 int     is_empty(t_stack *a);
 int     is_reverse_sorted(t_stack *a);

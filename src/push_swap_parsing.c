@@ -1,29 +1,5 @@
 #include "push_swap.h"
 
-void	clear(char **array)
-{
-	int	i;
-	i = 0;
-
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-int	count_args(char **tmp)
-{
-	int i;
-
-	i = 0;
-	while (tmp[i])
-		i++;
-	i -= 1;
-	return (i);
-}
-
 t_stack *parsing_string(char **argv)
 {
 	t_stack *a;

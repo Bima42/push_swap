@@ -76,7 +76,7 @@ void	sort_stack(t_stack *a, t_stack *b)
 			}
 			else
 				pb(a, b);
-			if (!is_reverse_sorted(b))
+			if (!is_reverse_sorted(b) && b->front != NULL && b->tail != NULL)
 			{
 				if (b->front->data < b->tail->data)
 					rb(b);

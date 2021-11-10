@@ -26,11 +26,15 @@ t_node  *new_node(int data);
 t_stack  *new_stack(void);
 
 //Parsing
-void    clear(char **array);
-int     count_args(char **tmp);
 t_stack     *parsing_string(char **argv);
 t_stack     *parsing_multi_args(char **argv);
 t_stack     *parsing_args(int argc, char **argv);
+
+//Parsing utils
+int     count_args(char **tmp);
+int     more_than_one(t_node *check, int data, int count);
+void    clear(char **array);
+void    check_for_dup(t_stack *a);
 
 //Command A
 void    sa(t_stack *a);

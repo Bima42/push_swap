@@ -55,10 +55,14 @@ void    rotate_both(t_stack *a, t_stack *b);
 void    reverse_rotate_both(t_stack *a, t_stack *b);
 
 //Solver
+void    sort_stack(t_stack *a, t_stack *b);
+void    send_small_data(t_stack *a, t_stack *b);
+void    sort_stack_b(t_stack *b);
+
+//Solver Utils
 int     yvan_recursive(int data, int count, t_node *current_node);
 int     is_sorted(t_stack *a);
 int     is_empty(t_stack *a);
 int     is_reverse_sorted(t_stack *a);
-void    sort_stack(t_stack *a, t_stack *b);
 
 #endif

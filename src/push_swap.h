@@ -61,14 +61,21 @@ int     is_sorted(t_stack *a);
 int     is_empty(t_stack *a);
 int     is_reverse_sorted(t_stack *a);
 void    solver(t_stack *a, t_stack *b);
+void    solver_short(t_stack *a);
+void    solver_med(t_stack *a, t_stack *b);
+void    solver_long(t_stack *a, t_stack *b);
 
 //Solver Utils
-void    solver_short(t_stack *a);
+int     get_min_data(t_node *node);
+int     get_max_data(t_node *node);
+
+//Solver Utils 2
+int     get_median_data(t_stack *a, int median, int max, int loop);
+int     yvan_recursive(int data, int count, t_node *current_node);
+void    sort_stack_b(t_stack *b, t_stack *a);
 
 //Backup
 /*void    sort_stack(t_stack *a, t_stack *b);
-void    send_small_data(t_stack *a, t_stack *b);
-void    sort_stack_b(t_stack *b);
-int     yvan_recursive(int data, int count, t_node *current_node);*/
+void    send_small_data(t_stack *a, t_stack *b);*/
 
 #endif

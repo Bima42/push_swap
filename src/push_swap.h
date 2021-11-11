@@ -74,6 +74,9 @@ int     get_median_data(t_stack *a, int median, int max, int loop);
 int     yvan_recursive(int data, int count, t_node *current_node);
 void    sort_stack_b(t_stack *b, t_stack *a);
 
+//Solver Utils 2
+int     get_pos_data(int min_data, t_node *node);
+
 //Backup
 /*void    sort_stack(t_stack *a, t_stack *b);
 void    send_small_data(t_stack *a, t_stack *b);*/

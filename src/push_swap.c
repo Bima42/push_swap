@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	b = new_stack();
 	check_for_dup(a);
 
-	solver_med(a, b);
+	solver(a, b);
 
 	free(a);
 	free(b);

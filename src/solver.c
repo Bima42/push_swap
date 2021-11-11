@@ -70,19 +70,26 @@ void	solver_med(t_stack *a, t_stack *b)
 		while(!is_empty(b))
 			pa(b, a);
 	}
-	display(a, b);
-	//TOUT CE QUI EST PLUS PETIT QUE MEDIAN EST ENVOYE DANS B
 }
 
 void	solver_long(t_stack *a, t_stack *b)
 {
-//	int min_data;
-//	int median;
-	(void)b;
-	(void)a;
+	int min_data;
+	int	pos_data;
 
-//	min_data = get_min_data(a->front);
-	//TOUT CE QUI EST PLUS PETIT QUE MEDIAN EST ENVOYE DANS B
+	while (list_size(a->front) > 6)
+	{
+		min_data = get_min_data(a->front);
+		pos_data = get_pos_data(min_data, a->front);
+		if (pos_data > list_size(a->front) / 2)
+			while (a->front->data != min_data)
+				rra(a);
+		else if (pos_data < list_size(a->front) / 2)
+			while (a->front->data != min_data)
+				ra(a);
+		pb(a, b);
+	}
+	solver_med(a, b);
 }
 void	solver(t_stack *a, t_stack *b)
 {
@@ -101,6 +108,6 @@ void	solver(t_stack *a, t_stack *b)
 		solver_short(a);
 	else if (list_size(a->front) <= 6)
 		solver_med(a, b);
-	else if (list_size(a->front) >= 6)
+	else if (list_size(a->front) > 6)
 		solver_long(a, b);
 }

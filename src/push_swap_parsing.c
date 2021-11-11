@@ -89,9 +89,6 @@ t_stack *parsing_args(int argc, char **argv)
 			return (parsing_multi_args(argv));
 		}
         else
-        {
-			write(1, "Error\n", 6);
 			exit(0);
-        }
         return (0);
 }

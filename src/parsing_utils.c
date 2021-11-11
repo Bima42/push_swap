@@ -1,5 +1,28 @@
 #include "push_swap.h"
 
+int	check_error_args(char **argv)
+{
+	int     i;
+	int     j;
+
+	i = 1;
+	j = 0;
+	while (argv[i])
+	{
+			j = 0;
+			while (ft_isdigit(argv[i][j]) || argv[i][j] == ' ')
+			{
+					if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' ')
+							return (0);
+					j++;
+			}
+			if (!ft_isdigit(argv[i][j]) && argv[i][j] != '\0')
+					return (0);
+			i++;
+	}
+	return (1);
+}
+
 void   clear(char **array)
 {
         int     i;

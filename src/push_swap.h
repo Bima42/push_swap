@@ -33,6 +33,7 @@ t_stack     *parsing_args(int argc, char **argv);
 //Parsing utils
 int     count_args(char **tmp);
 int     more_than_one(t_node *check, int data, int count);
+int     check_error_args(char **argv);
 void    clear(char **array);
 void    check_for_dup(t_stack *a);
 

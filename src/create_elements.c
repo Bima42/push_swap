@@ -53,15 +53,15 @@ void    display(t_stack *a, t_stack *b)
         }
 }
 
-int	list_size(t_stack *a)
+int	list_size(t_node *node)
 {
 	int	i;
 
 	i = 0;
-	while (a->front)
+	while (node != NULL)
 	{
 		i++;
-		a->front = a->front->next;
+		node = node->next;
 	}
 	return (i);
 }

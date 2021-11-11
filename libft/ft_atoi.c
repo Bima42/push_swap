@@ -14,11 +14,17 @@
 
 //Fuction that convert an ascii numbers to an int
 
+static void	fatal_error(void)
+{
+	write(1, "Error\n", 6);
+	exit(0);
+}
+
 int	ft_atoi(const char *nptr)
 {
-	int	sign;
-	int	count;
-	int	res;
+	long	sign;
+	long	count;
+	long	res;
 
 	sign = 1;
 	count = 0;
@@ -36,5 +42,8 @@ int	ft_atoi(const char *nptr)
 		res = res * 10 + nptr[count] - '0';
 		count++;
 	}
-	return (res * sign);
+	res *= sign;
+	if (res > 2147483647 || res < -2147483648)
+		fatal_error();
+	return ((int)res);
 }

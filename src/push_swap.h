@@ -21,7 +21,7 @@ typedef struct   s_stack
 
 //Create elements
 void    display(t_stack *a, t_stack *b);
-int     list_size(t_stack *a);
+int     list_size(t_node *node);
 t_node  *new_node(int data);
 t_stack  *new_stack(void);
 
@@ -57,14 +57,18 @@ void    rotate_both(t_stack *a, t_stack *b);
 void    reverse_rotate_both(t_stack *a, t_stack *b);
 
 //Solver
-void    sort_stack(t_stack *a, t_stack *b);
-void    send_small_data(t_stack *a, t_stack *b);
-void    sort_stack_b(t_stack *b);
-
-//Solver Utils
-int     yvan_recursive(int data, int count, t_node *current_node);
 int     is_sorted(t_stack *a);
 int     is_empty(t_stack *a);
 int     is_reverse_sorted(t_stack *a);
+void    solver(t_stack *a, t_stack *b);
+
+//Solver Utils
+void    solver_short(t_stack *a);
+
+//Backup
+/*void    sort_stack(t_stack *a, t_stack *b);
+void    send_small_data(t_stack *a, t_stack *b);
+void    sort_stack_b(t_stack *b);
+int     yvan_recursive(int data, int count, t_node *current_node);*/
 
 #endif

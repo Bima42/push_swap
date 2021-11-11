@@ -1,59 +1,46 @@
 #include "push_swap.h"
 
-void	send_small_data(t_stack *a, t_stack *b)
+void   solver_short(t_stack *a)
 {
-	if (a->front->data > a->front->next->data)
+	if (list_size(a->front) == 2 && !is_sorted(a))
+			sa(a);
+	else if (list_size(a->front) == 3 && !is_sorted(a))
 	{
-		if (a->front->data > a->tail->data)
+		if (is_reverse_sorted(a))
+		{
+			sa(a);
 			rra(a);
-		else
+		}
+		else if (a->front->data > a->front->next->data && a->front->data > a->tail->data)
+		{
+			ra(a);
+			if (!is_sorted(a))
+				sa(a);
+		}
+		else if (a->front->data < a->front->next->data && a->front->data < a->tail->data)
+		{
+			ra(a);
+			sa(a);
+			rra(a);
+		}
+		else if (a->front->data > a->front->next->data && a->front->data < a->tail->data)
 			sa(a);
 	}
-	if (a->front->data < a->front->next->data)
-	{
-		if (a->front->data > a->tail->data)
-			rra(a);
-		else
-			pb(a, b);
-	}
 }
 
-void	sort_stack_b(t_stack *b)
+void	solver(t_stack *a, t_stack *b)
 {
-	int	search_pos;
-	int	i;
-
-	if (b->front->data < b->tail->data)
-		rb(b);
-	else
-	{
-		i = 0;
-		search_pos = yvan_recursive(b->front->data, 0, b->front);
-		while (i++ < search_pos)
-		{
-			sb(b);
-			rb(b);
-		}
-		while (search_pos-- > 0)
-			rrb(b);
-	}
-}
-
-void	sort_stack(t_stack *a, t_stack *b)
-{
-
-	while (!is_sorted(a))
+	if (list_size(a->front) > 3 && is_reverse_sorted(a))
 	{
 		while (!is_empty(a))
-		{
-			if (a->front->next != NULL)
-				send_small_data(a, b);
-			else
-				pb(a, b);
-			if (!is_reverse_sorted(b) && b->front != NULL && b->tail != NULL)
-				sort_stack_b(b);
-		}
+			pb(a, b);
 		while (!is_empty(b))
+		{
+			if (list_size(b->front) != 1)
+				rrb(b);
 			pa(b, a);
+		}
 	}
+	else if (list_size(a->front) <= 3)
+		solver_short(a);
 }

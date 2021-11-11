@@ -10,11 +10,15 @@ int	check_error_args(char **argv)
 	while (argv[i])
 	{
 			j = 0;
-			while (ft_isdigit(argv[i][j]) || argv[i][j] == ' ')
+			while (ft_isdigit(argv[i][j]) || argv[i][j] == ' ' || argv[i][j] == '-')
 			{
-					if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' ')
-							return (0);
+				if (argv[i][j] == '-' && ft_isdigit(argv[i][j + 1]))
 					j++;
+				else if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' ')
+					return (0);
+				j++;
+				if (argv[i][j] == '-' && ft_isdigit(argv[i][j - 1]))
+					return (0);
 			}
 			if (!ft_isdigit(argv[i][j]) && argv[i][j] != '\0')
 					return (0);

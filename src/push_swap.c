@@ -10,7 +10,6 @@ int main(int argc, char **argv)
 	check_for_dup(a);
 
 	sort_stack(a, b);
-	display(a, b);
 
 	free(a);
 	free(b);

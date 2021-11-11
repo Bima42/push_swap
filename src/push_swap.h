@@ -26,6 +26,7 @@ t_node  *new_node(int data);
 t_stack  *new_stack(void);
 
 //Parsing
+int         only_whitespace(char **argv);
 t_stack     *parsing_string(char **argv);
 t_stack     *parsing_multi_args(char **argv);
 t_stack     *parsing_args(int argc, char **argv);

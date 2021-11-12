@@ -58,7 +58,6 @@ void	solver_med(t_stack *a, t_stack *b)
 	int min_data;
 	int max_data;
 	int median;
-	(void)b;
 
 	min_data = get_min_data(a->front);
 	max_data = get_max_data(a->front);
@@ -74,25 +73,113 @@ void	solver_med(t_stack *a, t_stack *b)
 
 void	solver_long(t_stack *a, t_stack *b)
 {
-	int min_data;
-	int	pos_data;
+	t_data_push data;
+	int			size;
+//	int			x;
+	int			i;
 
 	while (list_size(a->front) > 6)
 	{
-		min_data = get_min_data(a->front);
-		pos_data = get_pos_data(min_data, a->front);
-		if (pos_data > list_size(a->front) / 2)
-			while (a->front->data != min_data)
-				rra(a);
-		else if (pos_data < list_size(a->front) / 2)
-			while (a->front->data != min_data)
+		i = 1;
+		init_data(&data);
+		size = list_size(a->front);
+		data.data_1 = get_min_data(a->front);
+		data.data_2 = get_next_min_data(data.data_1, a->front);
+		data.pos_1 = get_pos_data(data.data_1, a->front) + 1;
+		data.pos_2 = get_pos_data(data.data_2, a->front) + 1;
+        if (data.pos_1 > size / 2)
+            while (a->front->data != data.data_1)
+			{
+				if (a->front->data == data.data_2)
+				{
+					data.flag_2 = i++;
+					pb(a, b);
+				}
+                rra(a);
+			}
+        if (data.pos_1 < size / 2)
+            while (a->front->data != data.data_1)
+			{
+				if (a->front->data == data.data_2)
+				{
+					data.flag_2 = i++;
+					pb(a, b);
+				}
+                ra(a);
+			}
+        pb(a, b);
+		if (data.flag_2 == 1)
+			sb(b);
+//		x = (data.data_1 + data.data_2) / 2;
+/*		if ((data.pos_1 < size / 2 && data.pos_2 < size / 2) || x < size / 2)
+			while (data.flag_1 == 0 || data.flag_2 == 0)
+			{
+				if (a->front->data == data.data_1)
+				{
+					pb(a, b);
+					data.flag_1 = i++;
+				}
+				if (a->front->data == data.data_2)
+				{
+					pb(a, b);
+					data.flag_2 = i++;
+				}
 				ra(a);
-		pb(a, b);
+			}
+		else if ((data.pos_1 > size / 2 && data.pos_2 > size / 2) || x > size / 2)
+			while (data.flag_1 == 0 || data.flag_2 == 0)
+			{
+				if (a->front->data == data.data_1)
+				{
+					pb(a, b);
+					data.flag_1 = i++;
+				}
+				if (a->front->data == data.data_2)
+				{
+					pb(a, b);
+					data.flag_2 = i++;
+				}
+				rra(a);
+			}
+		else if ((data.pos_1 - (size / 2)) < (data.pos_2 - (size / 2)))
+           while (data.flag_1 == 0 || data.flag_2 == 0)
+           {
+                if (a->front->data == data.data_1)
+                {
+                        pb(a, b);
+                        data.flag_1 = i++;
+                }
+                if (a->front->data == data.data_2)
+                {
+                        pb(a, b);
+                        data.flag_2 = i++;
+                }
+                rra(a);
+           }
+		else if ((data.pos_1 - (size / 2)) > (data.pos_2 - (size / 2)))
+           while (data.flag_1 == 0 || data.flag_2 == 0)
+           {
+                if (a->front->data == data.data_1)
+                {
+                        pb(a, b);
+                        data.flag_1 = i++;
+                }
+                if (a->front->data == data.data_2)
+                {
+                        pb(a, b);
+                        data.flag_2 = i++;
+                }
+                ra(a);
+		   }
+		if (data.flag_2 == 1)
+			sb(b);*/
 	}
 	solver_med(a, b);
 }
 void	solver(t_stack *a, t_stack *b)
 {
+	if (is_sorted(a))
+		return ;
 	if (list_size(a->front) > 3 && is_reverse_sorted(a))
 	{
 		while (!is_empty(a))

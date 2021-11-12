@@ -19,6 +19,16 @@ typedef struct   s_stack
     t_node  *tail;
 }               t_stack;
 
+typedef struct  s_data_push
+{
+    int data_1;
+    int pos_1;
+    int flag_1;
+    int data_2;
+    int pos_2;
+    int flag_2;
+}               t_data_push;
+
 //Create elements
 void    display(t_stack *a, t_stack *b);
 int     list_size(t_node *node);
@@ -76,6 +86,8 @@ void    sort_stack_b(t_stack *b, t_stack *a);
 
 //Solver Utils 2
 int     get_pos_data(int min_data, t_node *node);
+int     get_next_min_data(int min_data, t_node *node);
+void    init_data(t_data_push *data);
 
 //Backup
 /*void    sort_stack(t_stack *a, t_stack *b);

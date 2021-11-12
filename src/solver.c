@@ -86,7 +86,7 @@ void	solver_long(t_stack *a, t_stack *b)
 		data.data_2 = get_next_min_data(data.data_1, a->front);
 		data.pos_1 = get_pos_data(data.data_1, a->front) + 1;
 		data.pos_2 = get_pos_data(data.data_2, a->front) + 1;
-        if (data.pos_1 >= size / 2)
+        if (data.pos_1 >= size / 2 && data.pos_2 >= size / 2)
             while (a->front->data != data.data_1)
 			{
 				if (a->front->data == data.data_2)
@@ -96,7 +96,27 @@ void	solver_long(t_stack *a, t_stack *b)
 				}
                 rra(a);
 			}
-        if (data.pos_1 <= size / 2)
+        else if (data.pos_1 <= size / 2 && data.pos_2 <= size / 2)
+            while (a->front->data != data.data_1)
+			{
+				if (a->front->data == data.data_2)
+				{
+					data.flag_2 = i++;
+					pb(a, b);
+				}
+                ra(a);
+			}
+        else if (data.pos_1 >= size / 2)
+            while (a->front->data != data.data_1)
+			{
+				if (a->front->data == data.data_2)
+				{
+					data.flag_2 = i++;
+					pb(a, b);
+				}
+                rra(a);
+			}
+        else if (data.pos_1 <= size / 2)
             while (a->front->data != data.data_1)
 			{
 				if (a->front->data == data.data_2)

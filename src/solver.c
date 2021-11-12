@@ -75,7 +75,6 @@ void	solver_long(t_stack *a, t_stack *b)
 {
 	t_data_push data;
 	int			size;
-//	int			x;
 	int			i;
 
 	while (list_size(a->front) > 6)
@@ -87,7 +86,7 @@ void	solver_long(t_stack *a, t_stack *b)
 		data.data_2 = get_next_min_data(data.data_1, a->front);
 		data.pos_1 = get_pos_data(data.data_1, a->front) + 1;
 		data.pos_2 = get_pos_data(data.data_2, a->front) + 1;
-        if (data.pos_1 > size / 2)
+        if (data.pos_1 >= size / 2)
             while (a->front->data != data.data_1)
 			{
 				if (a->front->data == data.data_2)
@@ -97,7 +96,7 @@ void	solver_long(t_stack *a, t_stack *b)
 				}
                 rra(a);
 			}
-        if (data.pos_1 < size / 2)
+        if (data.pos_1 <= size / 2)
             while (a->front->data != data.data_1)
 			{
 				if (a->front->data == data.data_2)
@@ -110,69 +109,6 @@ void	solver_long(t_stack *a, t_stack *b)
         pb(a, b);
 		if (data.flag_2 == 1)
 			sb(b);
-//		x = (data.data_1 + data.data_2) / 2;
-/*		if ((data.pos_1 < size / 2 && data.pos_2 < size / 2) || x < size / 2)
-			while (data.flag_1 == 0 || data.flag_2 == 0)
-			{
-				if (a->front->data == data.data_1)
-				{
-					pb(a, b);
-					data.flag_1 = i++;
-				}
-				if (a->front->data == data.data_2)
-				{
-					pb(a, b);
-					data.flag_2 = i++;
-				}
-				ra(a);
-			}
-		else if ((data.pos_1 > size / 2 && data.pos_2 > size / 2) || x > size / 2)
-			while (data.flag_1 == 0 || data.flag_2 == 0)
-			{
-				if (a->front->data == data.data_1)
-				{
-					pb(a, b);
-					data.flag_1 = i++;
-				}
-				if (a->front->data == data.data_2)
-				{
-					pb(a, b);
-					data.flag_2 = i++;
-				}
-				rra(a);
-			}
-		else if ((data.pos_1 - (size / 2)) < (data.pos_2 - (size / 2)))
-           while (data.flag_1 == 0 || data.flag_2 == 0)
-           {
-                if (a->front->data == data.data_1)
-                {
-                        pb(a, b);
-                        data.flag_1 = i++;
-                }
-                if (a->front->data == data.data_2)
-                {
-                        pb(a, b);
-                        data.flag_2 = i++;
-                }
-                rra(a);
-           }
-		else if ((data.pos_1 - (size / 2)) > (data.pos_2 - (size / 2)))
-           while (data.flag_1 == 0 || data.flag_2 == 0)
-           {
-                if (a->front->data == data.data_1)
-                {
-                        pb(a, b);
-                        data.flag_1 = i++;
-                }
-                if (a->front->data == data.data_2)
-                {
-                        pb(a, b);
-                        data.flag_2 = i++;
-                }
-                ra(a);
-		   }
-		if (data.flag_2 == 1)
-			sb(b);*/
 	}
 	solver_med(a, b);
 }

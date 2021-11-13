@@ -75,7 +75,7 @@ void	solver_long(t_stack *a, t_stack *b)
 {
 	t_data data;
 
-	init(&data, a);
+	init(&data, a, 1);
 	collect(a, b, data, 1);
 	resolve_chunk(a, b);
 	while (a->tail->data != data.max_data)
@@ -89,6 +89,22 @@ void	solver_long(t_stack *a, t_stack *b)
 	while (!is_sorted(a))
 		ra(a);
 }
+
+void	solver_turbo_long(t_stack *a, t_stack *b)
+{
+	t_data data;
+
+	init(&data, a, 2);
+	collect(a, b, data, 1);
+	resolve_chunk(a, b);
+	while (a->tail->data != data.max_data)
+		ra(a);
+	collect(a, b, data, 3);
+	resolve_chunk(a, b);
+	while (!is_sorted(a))
+		rra(a);
+}
+
 void	solver(t_stack *a, t_stack *b)
 {
 	if (is_sorted(a))
@@ -110,4 +126,6 @@ void	solver(t_stack *a, t_stack *b)
 		solver_med(a, b);
 	else if (list_size(a->front) > 6)
 		solver_long(a, b);
+	else if (list_size(a->front) > 300)
+		solver_turbo_long(a, b);
 }

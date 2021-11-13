@@ -1,12 +1,23 @@
 #include "push_swap.h"
 
-void	init(t_data *data, t_stack *a)
+void	init(t_data *data, t_stack *a, int flag)
 {
-	data->lst_size = list_size(a->front);
-	data->min_data = get_min_data(a->front);
-	data->max_data = get_max_data(a->front);
-	data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3));
-	data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3) * 2);
+	if (flag == 1)
+	{
+		data->lst_size = list_size(a->front);
+		data->min_data = get_min_data(a->front);
+		data->max_data = get_max_data(a->front);
+		data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3));
+		data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3) * 2);
+	}
+	else if (flag == 2)
+	{
+		data->lst_size = list_size(a->front);
+		data->min_data = get_min_data(a->front);
+		data->max_data = get_max_data(a->front);
+		data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 2));
+		data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 2));
+	}
 }
 
 int	get_by(t_node *node, int lower_bound, int higher_bound, int from)

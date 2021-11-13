@@ -96,7 +96,7 @@ int     get_next_min_data(int min_data, t_node *node);
 //Solver Utils 3
 int     get_by(t_node *node, int lower_bound, int higher_bound, int from);
 int     smart_way(t_stack *a, t_data data, int zone, int *step);
-void    init(t_data *data, t_stack *a);
+void    init(t_data *data, t_stack *a, int flag);
 void    collect(t_stack *a, t_stack *b, t_data data, int zone);
 void    resolve_chunk(t_stack *a, t_stack *b);
 

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int    get_median_data(t_stack *a, int median, int max, int loop)
+int    get_median_data(t_stack *a, int min_data, int max, int loop)
 {
 	t_node	*node;
 	int     new_med;
@@ -9,7 +9,7 @@ int    get_median_data(t_stack *a, int median, int max, int loop)
 	new_med = max;
 	while (node != NULL)
 	{
-		if (node->data < max && node->data > median && node->data < new_med)
+		if (node->data < max && node->data > min_data && node->data < new_med)
 				new_med = node->data;
 		node = node->next;
 	}
@@ -55,4 +55,35 @@ int    yvan_recursive(int data, int count, t_node *current_node)
 	if (data < current_node->next->data)
 		return (yvan_recursive(data, count + 1, current_node->next));
 	return (count);
+}
+
+int    get_pos_data(int min_data, t_node *node)
+{
+        int     pos;
+
+        pos = 0;
+        if (node == NULL)
+                exit(0);
+        while (node != NULL)
+        {
+                if (node->data == min_data)
+                        return (pos);
+                pos++;
+                node = node->next;
+        }
+        exit(0);
+}
+
+int     get_next_min_data(int min_data, t_node *node)
+{
+        int     next_min_data;
+
+        next_min_data = 2147483647;
+        while (node != NULL)
+        {
+                if (node->data < next_min_data && node->data > min_data)
+                        next_min_data = node->data;
+                node = node->next;
+        }
+        return (next_min_data);
 }

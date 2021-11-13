@@ -19,15 +19,22 @@ typedef struct   s_stack
     t_node  *tail;
 }               t_stack;
 
-typedef struct  s_data_push
+typedef struct   s_data
 {
-    int data_1;
-    int pos_1;
-    int flag_1;
-    int data_2;
-    int pos_2;
-    int flag_2;
-}               t_data_push;
+    int min_data;
+    int max_data;
+    int median_low;
+    int median_high;
+    int lst_size;
+}               t_data;
+
+typedef struct   s_chunk
+{
+    int min;
+    int max;
+    int size;
+    int pos;
+}               t_chunk;
 
 //Create elements
 void    display(t_stack *a, t_stack *b);
@@ -67,27 +74,35 @@ void    rotate_both(t_stack *a, t_stack *b);
 void    reverse_rotate_both(t_stack *a, t_stack *b);
 
 //Solver
-int     is_sorted(t_stack *a);
-int     is_empty(t_stack *a);
-int     is_reverse_sorted(t_stack *a);
 void    solver(t_stack *a, t_stack *b);
 void    solver_short(t_stack *a);
 void    solver_med(t_stack *a, t_stack *b);
 void    solver_long(t_stack *a, t_stack *b);
 
 //Solver Utils
+int     is_sorted(t_stack *a);
+int     is_empty(t_stack *a);
+int     is_reverse_sorted(t_stack *a);
 int     get_min_data(t_node *node);
 int     get_max_data(t_node *node);
 
 //Solver Utils 2
-int     get_median_data(t_stack *a, int median, int max, int loop);
+int     get_median_data(t_stack *a, int min_data, int max, int loop);
 int     yvan_recursive(int data, int count, t_node *current_node);
 void    sort_stack_b(t_stack *b, t_stack *a);
-
-//Solver Utils 2
 int     get_pos_data(int min_data, t_node *node);
 int     get_next_min_data(int min_data, t_node *node);
-void    init_data(t_data_push *data);
+
+//Solver Utils 3
+int     get_by(t_node *node, int lower_bound, int higher_bound, int from);
+int     smart_way(t_stack *a, t_data data, int zone, int *step);
+void    init(t_data *data, t_stack *a);
+void    collect(t_stack *a, t_stack *b, t_data data, int zone);
+void    resolve_chunk(t_stack *a, t_stack *b);
+
+//Solver Utils 4
+int     shortest_pos(t_node *node, int min, int max);
+void    init_chunk(t_stack *b, t_chunk *chunk);
 
 //Backup
 /*void    sort_stack(t_stack *a, t_stack *b);

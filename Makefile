@@ -4,7 +4,8 @@ PUSH_SWAP_SRCS	=	$(addprefix src/, $(SRCS))
 
 SRCS		=	push_swap.c push_swap_parsing.c create_elements.c \
                 commands_a.c commands_b.c commands_both.c solver.c \
-                parsing_utils.c solver_utils.c solver_utils_2.c solver_utils_3.c
+                parsing_utils.c solver_utils.c solver_utils_2.c solver_utils_3.c \
+				solver_utils_4.c
 
 HEAD_PUSH_SWAP	= src/push_swap.h
 

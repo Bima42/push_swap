@@ -82,12 +82,15 @@ void	solver_long(t_stack *a, t_stack *b)
 	resolve_chunk(a, b);
 	while (a->tail->data != data.max_data)
 		ra(a);
-
+	data.median_low = get_next_min_data(data.median_low, a->front);
+	data.median_high = get_next_min_data(data.median_high, a->front);
 	collect(a, b, data, 2);
 	resolve_chunk(a, b);
 
 	while (a->front->data != data.median_low)
 		rra(a);
+	data.median_low = get_next_min_data(data.median_low, a->front);
+	data.median_high = get_next_min_data(data.median_high, a->front);
 	collect(a, b, data, 3);
 	resolve_chunk(a, b);
 

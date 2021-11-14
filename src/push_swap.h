@@ -70,8 +70,8 @@ void    pb(t_stack *b, t_stack *a);
 //Command Both
 void    front_tail_null(t_stack *a);
 void    swap_both(t_stack *a, t_stack *b);
-void    rotate_both(t_stack *a, t_stack *b);
-void    reverse_rotate_both(t_stack *a, t_stack *b);
+void    rr(t_stack *a, t_stack *b);
+void    rrr(t_stack *a, t_stack *b);
 
 //Solver
 void    solver(t_stack *a, t_stack *b);

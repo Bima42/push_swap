@@ -113,21 +113,16 @@ void	solver_turbo_long(t_stack *a, t_stack *b)
 	collect_long(a, b, data, 3);
 	resolve_chunk(a, b);
 	while (a->tail->data != data.max)
-		ra(a);
+		rra(a);
 	collect_long(a, b, data, 4);
 	resolve_chunk(a, b);
 	while (a->tail->data != data.max)
-		ra(a);
+		rra(a);
 	collect_long(a, b, data, 5);
 	resolve_chunk(a, b);
-	while (a->tail->data != data.max)
-		ra(a);
 	pos = get_pos_data(data.max, a->front);
 	while (!is_sorted(a) && pos > data.size / 2)
-	{
-		write(1, "ici\n", 4);
 		rra(a);
-	}
 	while (!is_sorted(a) && pos <= data.size / 2)
 		ra(a);
 }

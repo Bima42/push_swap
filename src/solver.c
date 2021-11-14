@@ -76,7 +76,7 @@ void	solver_long(t_stack *a, t_stack *b)
 	t_data data;
 	int		pos;
 
-	init(&data, a, 1);
+	init(&data, a);
 
 	collect(a, b, data, 1);
 	resolve_chunk(a, b);
@@ -97,20 +97,38 @@ void	solver_long(t_stack *a, t_stack *b)
 
 void	solver_turbo_long(t_stack *a, t_stack *b)
 {
-	t_data data;
+	t_long data;
 	int		pos;
 
-	init(&data, a, 2);
-	collect(a, b, data, 1);
+	pos = 0;
+	init_long(&data, a);
+	collect_long(a, b, data, 1);
 	resolve_chunk(a, b);
-	while (a->tail->data != data.max_data)
+	while (a->tail->data != data.max)
 		ra(a);
-	collect(a, b, data, 3);
+	collect_long(a, b, data, 2);
 	resolve_chunk(a, b);
-	pos = get_pos_data(data.max_data, a->front);
-	while (!is_sorted(a) && pos >= data.lst_size / 2)
+	while (a->tail->data != data.max)
+		ra(a);
+	collect_long(a, b, data, 3);
+	resolve_chunk(a, b);
+	while (a->tail->data != data.max)
+		ra(a);
+	collect_long(a, b, data, 4);
+	resolve_chunk(a, b);
+	while (a->tail->data != data.max)
+		ra(a);
+	collect_long(a, b, data, 5);
+	resolve_chunk(a, b);
+	while (a->tail->data != data.max)
+		ra(a);
+	pos = get_pos_data(data.max, a->front);
+	while (!is_sorted(a) && pos > data.size / 2)
+	{
+		write(1, "ici\n", 4);
 		rra(a);
-	while (!is_sorted(a) && pos < data.lst_size / 2)
+	}
+	while (!is_sorted(a) && pos <= data.size / 2)
 		ra(a);
 }
 
@@ -133,8 +151,8 @@ void	solver(t_stack *a, t_stack *b)
 		solver_short(a);
 	else if (list_size(a->front) <= 6)
 		solver_med(a, b);
-	else if (list_size(a->front) > 6)
+	else if (list_size(a->front) <= 100)
 		solver_long(a, b);
-	else if (list_size(a->front) > 300)
+	else if (list_size(a->front) > 100)
 		solver_turbo_long(a, b);
 }

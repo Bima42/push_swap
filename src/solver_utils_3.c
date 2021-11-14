@@ -1,23 +1,14 @@
 #include "push_swap.h"
 
-void	init(t_data *data, t_stack *a, int flag)
+void	init(t_data *data, t_stack *a)
 {
-	if (flag == 1)
-	{
-		data->lst_size = list_size(a->front);
-		data->min_data = get_min_data(a->front);
-		data->max_data = get_max_data(a->front);
-		data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3));
-		data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3) * 2);
-	}
-	else if (flag == 2)
-	{
-		data->lst_size = list_size(a->front);
-		data->min_data = get_min_data(a->front);
-		data->max_data = get_max_data(a->front);
-		data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 2));
-		data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 2));
-	}
+	data->lst_size = list_size(a->front);
+	data->min_data = get_min_data(a->front);
+	data->max_data = get_max_data(a->front);
+	data->median_low = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3));
+	data->median_high = get_median_data(a, data->min_data, data->max_data, (data->lst_size / 3) * 2);
+	data->front = 0;
+	data->tail = 0;
 }
 
 int	get_by(t_node *node, int lower_bound, int higher_bound, int from)
@@ -44,44 +35,27 @@ int	get_by(t_node *node, int lower_bound, int higher_bound, int from)
 
 int	smart_way(t_stack *a, t_data data, int zone, int *step)
 {
-	int	front;
-	int	tail;
-
-	if (zone == 3)
-	{
-		front = get_by(a->front, data.min_data, data.median_low, 1);
-		tail = get_by(a->tail, data.min_data, data.median_low, -1);
-	}
-	else if (zone == 2)
-	{
-		front = get_by(a->front, data.median_low, data.median_high, 1);
-		tail = get_by(a->tail, data.median_low, data.median_high, -1);
-	}
-	else if (zone == 1)
-	{
-		front = get_by(a->front, data.median_high, data.max_data, 1);
-		tail = get_by(a->tail, data.median_high, data.max_data, -1);
-	}
-	if (front > tail)
-	{
-		*step = tail;
-		return (-1);
-	}
-	else if (front < tail)
-	{
-		*step = front;
-		return (1);
-	}
-	else if (front == 0 && tail == 0)
-	{
-		*step = 0;
-		return (0);
-	}
-	else
-	{
-		*step = front;
-		return (1);
-	}
+        smart_way_decision(a, &data, zone);
+        if (data.front < data.tail)
+        {
+                *step = data.front;
+                return (1);
+        }
+        else if (data.front > data.tail)
+        {
+                *step = data.tail;
+                return (-1);
+        }
+        else if (data.front == 0 && data.front == 0)
+        {
+                *step = 0;
+                return (0);
+        }
+        else
+        {
+                *step = data.front;
+                return (1);
+        }
 }
 
 void	collect(t_stack *a, t_stack *b, t_data data, int zone)

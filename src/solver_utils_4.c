@@ -1,5 +1,24 @@
 #include "push_swap.h"
 
+void   smart_way_decision(t_stack *a, t_data *data, int zone)
+{
+	if (zone == 3)
+	{
+			data->front = get_by(a->front, data->min_data, data->median_low, 1);
+			data->tail = get_by(a->tail, data->min_data, data->median_low, -1);
+	}
+	if (zone == 2)
+	{
+			data->front = get_by(a->front, data->median_low, data->median_high, 1);
+			data->tail = get_by(a->tail, data->median_low, data->median_high, -1);
+	}
+	if (zone == 1)
+	{
+			data->front = get_by(a->front, data->median_high, data->max_data, 1);
+			data->tail = get_by(a->tail, data->median_high, data->max_data, -1);
+	}
+}
+
 int	shortest_pos(t_node *node, int min, int max)
 {
 	int	i;

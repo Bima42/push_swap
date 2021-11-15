@@ -12,10 +12,10 @@ void   resolve_chunk(t_stack *a, t_stack *b)
 {
 	t_chunk chunk;
 
+	init_chunk(b, &chunk);
+	chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
 	while (!is_empty(b))
 	{
-		init_chunk(b, &chunk);
-		chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
 		if (chunk.pos <= chunk.size / 2)
 			while (b->front->data != chunk.min && b->front->data != chunk.max)
 				rb(b);
@@ -25,10 +25,23 @@ void   resolve_chunk(t_stack *a, t_stack *b)
 		if (b->front->data == chunk.min)
 		{
 			pa(b, a);
-			ra(a);
+			if (is_empty(b))
+				break ;
+			init_chunk(b, &chunk);
+			chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
+			if (chunk.pos <= chunk.size / 2 && chunk.pos != 1)
+				rr(a, b);
+			else
+				ra(a);
 		}
 		else if (b->front->data == chunk.max)
+		{
 			pa(b, a);
+			if (is_empty(b))
+				break ;
+			init_chunk(b, &chunk);
+			chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
+		}
 	}
 }
 

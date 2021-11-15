@@ -14,22 +14,28 @@ void   init_long(t_long *data, t_stack *a, int chunk)
 	data->to_front = 0;
 }
 
-int	get_by(t_node *node, int lower_bound, int higher_bound, int from)
+int	get_by(t_node *node, t_long data, int from)
 {
 	int	i;
 
 	i = 1;
 	while (node != NULL && from == 1)
 	{
-		if (node->data >= lower_bound && node->data <= higher_bound)
-			return (i);
+		if (data.low == data.min)
+			if (node->data >= data.low && node->data <= data.high)
+				return (i);
+		if (node->data > data.low && node->data <= data.high)
+				return (i);
 		i++;
 		node = node->next;
 	}
 	while (node != NULL && from == -1)
 	{
-		if (node->data >= lower_bound && node->data <= higher_bound)
-			return (i);
+		if (data.low == data.min)
+			if (node->data >= data.low && node->data <= data.high)
+				return (i);
+		if (node->data > data.low && node->data <= data.high)
+				return (i);
 		i++;
 		node = node->prev;
 	}
@@ -51,8 +57,8 @@ void   set_median_low(t_long *data, t_stack *a, int nb_chunk)
 
 int   smart_way_long(t_stack *a, t_long data, int *step)
 {
-	data.front = get_by(a->front, data.low, data.high, 1);
-	data.tail = get_by(a->tail, data.low, data.high, -1);
+	data.front = get_by(a->front, data, 1);
+	data.tail = get_by(a->tail, data, -1);
 	if (data.front < data.tail)
 	{
 		*step = data.front;

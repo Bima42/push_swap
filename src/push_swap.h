@@ -102,7 +102,7 @@ int     get_next_min_data(int min_data, t_node *node);
 void    init_long(t_long *data, t_stack *a, int chunk);
 void    set_median_low(t_long *data, t_stack *a, int nb_chunk);
 void    collect(t_stack *a, t_stack *b, t_long data);
-int     get_by(t_node *node, int lower_bound, int higher_bound, int from);
+int     get_by(t_node *node, t_long data, int from);
 int     smart_way_long(t_stack *a, t_long data, int *step);
 
 //Utils_long_2

@@ -19,17 +19,6 @@ typedef struct   s_stack
     t_node  *tail;
 }               t_stack;
 
-typedef struct   s_data
-{
-    int min_data;
-    int max_data;
-    int median_low;
-    int median_high;
-    int lst_size;
-    int front;
-    int tail;
-}               t_data;
-
 typedef struct   s_chunk
 {
     int min;
@@ -45,10 +34,11 @@ typedef struct  s_long
     int size;
     int front;
     int tail;
-    int med_1;
-    int med_2;
-    int med_3;
-    int med_4;
+    int low;
+    int high;
+    int mult;
+    int zone;
+    int to_front;
 }               t_long;
 
 //Create elements
@@ -64,11 +54,11 @@ t_stack     *parsing_multi_args(char **argv);
 t_stack     *parsing_args(int argc, char **argv);
 
 //Parsing utils
+void    clear(char **array);
+void    check_for_dup(t_stack *a);
 int     count_args(char **tmp);
 int     more_than_one(t_node *check, int data, int count);
 int     check_error_args(char **argv);
-void    clear(char **array);
-void    check_for_dup(t_stack *a);
 
 //Command A
 void    sa(t_stack *a);
@@ -92,43 +82,32 @@ void    rrr(t_stack *a, t_stack *b);
 void    solver(t_stack *a, t_stack *b);
 void    solver_short(t_stack *a);
 void    solver_med(t_stack *a, t_stack *b);
-void    solver_long(t_stack *a, t_stack *b);
-void    solver_turbo_long(t_stack *a, t_stack *b);
+void    solver_long(t_stack *a, t_stack *b, int nb_chunk);
 
-//Solver Utils
+//List Utils
 int     is_sorted(t_stack *a);
-int     is_empty(t_stack *a);
 int     is_reverse_sorted(t_stack *a);
+int     is_empty(t_stack *a);
 int     get_min_data(t_node *node);
 int     get_max_data(t_node *node);
 
-//Solver Utils 2
+//List Utils 2
+void    sort_stack_b(t_stack *b, t_stack *a);
 int     get_median_data(t_stack *a, int min_data, int max, int loop);
 int     yvan_recursive(int data, int count, t_node *current_node);
-void    sort_stack_b(t_stack *b, t_stack *a);
 int     get_pos_data(int min_data, t_node *node);
 int     get_next_min_data(int min_data, t_node *node);
 
-//Solver Utils 3
+//utils_long
+void    init_long(t_long *data, t_stack *a, int chunk);
+void    set_median_low(t_long *data, t_stack *a, int nb_chunk);
+void    collect(t_stack *a, t_stack *b, t_long data);
 int     get_by(t_node *node, int lower_bound, int higher_bound, int from);
-int     smart_way(t_stack *a, t_data data, int zone, int *step);
-void    init(t_data *data, t_stack *a);
-void    collect(t_stack *a, t_stack *b, t_data data, int zone);
-void    resolve_chunk(t_stack *a, t_stack *b);
+int     smart_way_long(t_stack *a, t_long data, int *step);
 
-//Solver Utils 4
-int     shortest_pos(t_node *node, int min, int max);
+//Utils_long_2
 void    init_chunk(t_stack *b, t_chunk *chunk);
-void    smart_way_decision(t_stack *a, t_data *data, int zone);
-
-//Solver_long_utils
-void    smart_way_decision_long(t_stack *a, t_long *data, int zone);
-int     smart_way_long(t_stack *a, t_long data, int zone, int *step);
-void    collect_long(t_stack *a, t_stack *b, t_long data, int zone);
-void    init_long(t_long *data, t_stack *a);
-
-//Backup
-/*void    sort_stack(t_stack *a, t_stack *b);
-void    send_small_data(t_stack *a, t_stack *b);*/
+void    resolve_chunk(t_stack *a, t_stack *b);
+int     shortest_pos(t_node *node, int min, int max);
 
 #endif

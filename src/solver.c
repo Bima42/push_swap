@@ -71,60 +71,28 @@ void	solver_med(t_stack *a, t_stack *b)
 	}
 }
 
-void	solver_long(t_stack *a, t_stack *b)
+void  solver_long(t_stack *a, t_stack *b, int nb_chunk)
 {
-	t_data data;
-	int		pos;
+	t_long  data;
 
-	init(&data, a);
-
-	collect(a, b, data, 1);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max_data)
-		ra(a);
-	collect(a, b, data, 2);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max_data)
-		rra(a);
-	collect(a, b, data, 3);
-	resolve_chunk(a, b);
-	pos = get_pos_data(data.max_data, a->front);
-	while (!is_sorted(a) && pos >= data.lst_size / 2)
-		rra(a);
-	while (!is_sorted(a) && pos < data.lst_size / 2)
-		ra(a);
-}
-
-void	solver_turbo_long(t_stack *a, t_stack *b)
-{
-	t_long data;
-	int		pos;
-
-	pos = 0;
-	init_long(&data, a);
-	collect_long(a, b, data, 1);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max)
-		ra(a);
-	collect_long(a, b, data, 2);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max)
-		ra(a);
-	collect_long(a, b, data, 3);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max)
-		rra(a);
-	collect_long(a, b, data, 4);
-	resolve_chunk(a, b);
-	while (a->tail->data != data.max)
-		rra(a);
-	collect_long(a, b, data, 5);
-	resolve_chunk(a, b);
-	pos = get_pos_data(data.max, a->front);
-	while (!is_sorted(a) && pos > data.size / 2)
-		rra(a);
-	while (!is_sorted(a) && pos <= data.size / 2)
-		ra(a);
+	init_long(&data, a, nb_chunk);
+	data.high = data.max;
+	while (data.zone++ < nb_chunk)
+	{
+		set_median_low(&data, a, nb_chunk);
+		collect(a, b, data);
+		if (data.zone >= 2)
+			while (a->front->data != data.to_front)
+				rra(a);
+		resolve_chunk(a, b);
+		if (data.zone <= nb_chunk / 2)
+			while(a->tail->data != data.max)
+				ra(a);
+		else if (data.zone > nb_chunk / 2)
+			while(a->tail->data != data.max)
+				rra(a);
+		data.high = data.low;
+	}
 }
 
 void	solver(t_stack *a, t_stack *b)
@@ -147,7 +115,7 @@ void	solver(t_stack *a, t_stack *b)
 	else if (list_size(a->front) <= 6)
 		solver_med(a, b);
 	else if (list_size(a->front) <= 100)
-		solver_long(a, b);
+		solver_long(a, b, 4);
 	else if (list_size(a->front) > 100)
-		solver_turbo_long(a, b);
+		solver_long(a, b, 8);
 }

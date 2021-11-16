@@ -8,7 +8,7 @@ SRCS		=	push_swap.c solver.c \
                 utils/list_utils.c utils/list_utils_2.c \
 				utils/utils_long.c utils/utils_long_2.c utils/solver_utils.c
 
-HEAD_PUSH_SWAP	= src/push_swap.h
+HEAD_PUSH_SWAP	= src/
 
 OBJS_PUSH_SWAP	=	$(addprefix src/, $(SRCS:.c=.o))
 

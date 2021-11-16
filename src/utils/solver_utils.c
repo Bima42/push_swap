@@ -35,3 +35,29 @@ int	collect_decision(t_stack *b, t_long data)
 		return (1);
 	return (0);
 }
+
+void	free_elements(t_stack *a, t_stack *b)
+{
+	t_node	*tmp;
+
+	if (a->front != NULL)
+	{
+		while (a->front->next != NULL)
+		{
+			tmp = a->front;
+			a->front = a->front->next;
+			free(tmp);
+		}
+		free(a->front);
+	}
+	if (b->front != NULL)
+	{
+		while (b->front->next != NULL)
+		{
+			tmp = b->front;
+			b->front = b->front->next;
+			free(tmp);
+		}
+		free(b->front);
+	}
+}

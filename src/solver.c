@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:31:00 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 16:34:31 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:02:49 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	solver_short(t_stack *a)
 	else if (list_size(a->front) == 3 && !is_sorted(a))
 	{
 		if (is_reverse_sorted(a))
-		{
-			sa(a);
-			rra(a);
-		}
+			solver_shorter(a, 1);
 		else if (a->front->data > a->front->next->data
 			&& a->front->data > a->tail->data)
 		{
@@ -32,11 +29,7 @@ void	solver_short(t_stack *a)
 		}
 		else if (a->front->data < a->front->next->data
 			&& a->front->data < a->tail->data)
-		{
-			ra(a);
-			sa(a);
-			rra(a);
-		}
+			solver_shorter(a, 0);
 		else if (a->front->data > a->front->next->data
 			&& a->front->data < a->tail->data)
 			sa(a);

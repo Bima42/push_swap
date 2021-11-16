@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:48:00 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 16:48:45 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:16:44 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ void	resolve_chunk(t_stack *a, t_stack *b)
 	chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
 	while (!is_empty(b))
 	{
-		if (chunk.pos <= chunk.size / 2)
-			while (b->front->data != chunk.min && b->front->data != chunk.max)
-				rb(b);
-		else if (chunk.pos > chunk.size / 2)
-			while (b->front->data != chunk.min && b->front->data != chunk.max)
-				rrb(b);
+		side_decision(b, chunk);
 		if (b->front->data == chunk.min)
 		{
 			pa(b, a);
@@ -41,10 +36,7 @@ void	resolve_chunk(t_stack *a, t_stack *b)
 				break ;
 			init_chunk(b, &chunk);
 			chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
-			if (chunk.pos <= chunk.size / 2 && chunk.pos != 1)
-				rr(a, b);
-			else
-				ra(a);
+			rr_decision(a, b, chunk);
 		}
 		else if (b->front->data == chunk.max)
 		{
@@ -55,6 +47,24 @@ void	resolve_chunk(t_stack *a, t_stack *b)
 			chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);
 		}
 	}
+}
+
+void	side_decision(t_stack *b, t_chunk chunk)
+{
+	if (chunk.pos <= chunk.size / 2)
+		while (b->front->data != chunk.min && b->front->data != chunk.max)
+			rb(b);
+	else if (chunk.pos > chunk.size / 2)
+		while (b->front->data != chunk.min && b->front->data != chunk.max)
+			rrb(b);
+}
+
+void	rr_decision(t_stack *a, t_stack *b, t_chunk chunk)
+{
+	if (chunk.pos <= chunk.size / 2 && chunk.pos != 1)
+		rr(a, b);
+	else
+		ra(a);
 }
 
 int	shortest_pos(t_node *node, int min, int max)

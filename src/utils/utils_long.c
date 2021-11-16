@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:45:51 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 16:47:50 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:09:05 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	set_median_low(t_long *data, t_stack *a, int nb_chunk)
 		data->low = data->min;
 		return ;
 	}
-	data->low = get_median_data(a, data->min, data->max, (data->size / nb_chunk) * data->mult);
+	data->low = get_median_data(a, data->min, data->max,
+			(data->size / nb_chunk) * data->mult);
 	data->mult -= 1;
 }
 
@@ -108,8 +109,7 @@ void	collect(t_stack *a, t_stack *b, t_long data)
 			while (--step)
 				ra(a);
 			pb(a, b);
-			if (list_size(b->front) > 1 && (b->front->data == data.max || b->front->data == data.min
-					|| b->front->data == data.low || b->front->data == data.high))
+			if (collect_decision(b, data))
 				rb(b);
 		}
 		else if (way == -1 && step != 0)
@@ -117,8 +117,7 @@ void	collect(t_stack *a, t_stack *b, t_long data)
 			while (step--)
 				rra(a);
 			pb(a, b);
-			if (list_size(b->front) > 1 && (b->front->data == data.max || b->front->data == data.min
-					|| b->front->data == data.low || b->front->data == data.high))
+			if (collect_decision(b, data))
 				rb(b);
 		}
 	}

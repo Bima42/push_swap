@@ -6,7 +6,7 @@ SRCS		=	push_swap.c solver.c \
 				parsing/push_swap_parsing.c parsing/create_elements.c parsing/parsing_utils.c \
                 commands/commands_a.c commands/commands_b.c commands/commands_both.c \
                 utils/list_utils.c utils/list_utils_2.c \
-				utils/utils_long.c utils/utils_long_2.c
+				utils/utils_long.c utils/utils_long_2.c utils/solver_utils.c
 
 HEAD_PUSH_SWAP	= src/push_swap.h
 

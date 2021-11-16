@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:34:54 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 16:42:14 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:17:14 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,11 @@ int		smart_way_long(t_stack *a, t_long data, int *step);
 void	init_chunk(t_stack *b, t_chunk *chunk);
 void	resolve_chunk(t_stack *a, t_stack *b);
 int		shortest_pos(t_node *node, int min, int max);
+void	side_decision(t_stack *b, t_chunk chunk);
+void	rr_decision(t_stack *a, t_stack *b, t_chunk chunk);
+
+//Solver_utils
+void	solver_shorter(t_stack *a, int flag);
+int		collect_decision(t_stack *b, t_long data);
 
 #endif

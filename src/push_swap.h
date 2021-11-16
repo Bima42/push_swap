@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:34:54 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 18:17:14 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:34:16 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	pb(t_stack *b, t_stack *a);
 
 //Command Both
 void	front_tail_null(t_stack *a);
-void	swap_both(t_stack *a, t_stack *b);
+void	ss(t_stack *a, t_stack *b);
 void	rr(t_stack *a, t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 

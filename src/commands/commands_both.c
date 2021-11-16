@@ -6,13 +6,13 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:05 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/16 16:18:36 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:33:57 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	swap_both(t_stack *a, t_stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
 	int	tmp;
 	int	temp;

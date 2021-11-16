@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_long_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:48:00 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:48:45 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 void	init_chunk(t_stack *b, t_chunk *chunk)
@@ -8,9 +20,9 @@ void	init_chunk(t_stack *b, t_chunk *chunk)
 	chunk->pos = 0;
 }
 
-void   resolve_chunk(t_stack *a, t_stack *b)
+void	resolve_chunk(t_stack *a, t_stack *b)
 {
-	t_chunk chunk;
+	t_chunk	chunk;
 
 	init_chunk(b, &chunk);
 	chunk.pos = shortest_pos(b->front, chunk.min, chunk.max);

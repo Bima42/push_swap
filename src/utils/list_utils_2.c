@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:43:53 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:45:42 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-int    get_median_data(t_stack *a, int min_data, int max, int loop)
+int	get_median_data(t_stack *a, int min_data, int max, int loop)
 {
 	t_node	*node;
-	int     new_med;
+	int		new_med;
 
 	node = a->front;
 	new_med = max;
 	while (node != NULL)
 	{
 		if (node->data < max && node->data > min_data && node->data < new_med)
-				new_med = node->data;
+			new_med = node->data;
 		node = node->next;
 	}
 	if (loop > 1)
@@ -19,10 +31,10 @@ int    get_median_data(t_stack *a, int min_data, int max, int loop)
 		return (new_med);
 }
 
-void   sort_stack_b(t_stack *b, t_stack *a)
+void	sort_stack_b(t_stack *b, t_stack *a)
 {
-	int     search_pos;
-	int     i;
+	int	search_pos;
+	int	i;
 
 	if (b->front != NULL && b->tail != NULL)
 	{
@@ -48,7 +60,7 @@ void   sort_stack_b(t_stack *b, t_stack *a)
 	}
 }
 
-int    yvan_recursive(int data, int count, t_node *current_node)
+int	yvan_recursive(int data, int count, t_node *current_node)
 {
 	if (current_node->next == NULL)
 		return (count);
@@ -57,33 +69,33 @@ int    yvan_recursive(int data, int count, t_node *current_node)
 	return (count);
 }
 
-int    get_pos_data(int min_data, t_node *node)
+int	get_pos_data(int min_data, t_node *node)
 {
-        int     pos;
+	int	pos;
 
-        pos = 0;
-        if (node == NULL)
-                exit(0);
-        while (node != NULL)
-        {
-                if (node->data == min_data)
-                        return (pos);
-                pos++;
-                node = node->next;
-        }
-        exit(0);
+	pos = 0;
+	if (node == NULL)
+		exit(0);
+	while (node != NULL)
+	{
+		if (node->data == min_data)
+			return (pos);
+		pos++;
+		node = node->next;
+	}
+	exit(0);
 }
 
-int     get_next_min_data(int min_data, t_node *node)
+int	get_next_min_data(int min_data, t_node *node)
 {
-        int     next_min_data;
+	int	next_min_data;
 
-        next_min_data = 2147483647;
-        while (node != NULL)
-        {
-                if (node->data < next_min_data && node->data > min_data)
-                        next_min_data = node->data;
-                node = node->next;
-        }
-        return (next_min_data);
+	next_min_data = 2147483647;
+	while (node != NULL)
+	{
+		if (node->data < next_min_data && node->data > min_data)
+			next_min_data = node->data;
+		node = node->next;
+	}
+	return (next_min_data);
 }

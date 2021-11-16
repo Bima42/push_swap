@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_parsing.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:26:09 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:28:11 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 int	only_whitespace(char **argv)
@@ -12,12 +24,12 @@ int	only_whitespace(char **argv)
 	return (0);
 }
 
-t_stack *parsing_string(char **argv)
+t_stack	*parsing_string(char **argv)
 {
-	t_stack *a;
-	t_node  *temp;
-	int             i;
-	char    **tmp;
+	t_stack	*a;
+	t_node	*temp;
+	int		i;
+	char	**tmp;
 
 	a = new_stack();
 	tmp = ft_split(argv[1], ' ');
@@ -41,11 +53,11 @@ t_stack *parsing_string(char **argv)
 	return (a);
 }
 
-t_stack *parsing_multi_args(char **argv)
+t_stack	*parsing_multi_args(char **argv)
 {
-	t_stack *a;
-	t_node  *temp;
-	int     i;
+	t_stack	*a;
+	t_node	*temp;
+	int		i;
 
 	a = new_stack();
 	i = 1;
@@ -68,27 +80,27 @@ t_stack *parsing_multi_args(char **argv)
 	return (a);
 }
 
-t_stack *parsing_args(int argc, char **argv)
+t_stack	*parsing_args(int argc, char **argv)
 {
-        if (argc == 2)
+	if (argc == 2)
+	{
+		if (!check_error_args(argv))
 		{
-			if (!check_error_args(argv))
-			{
-				write(1, "Error\n", 6);
-				exit(0);
-			}
-            return (parsing_string(argv));
-		}
-        else if (argc > 2)
-		{
-			if (!check_error_args(argv))
-			{
-				write(1, "Error\n", 6);
-				exit(0);
-			}
-			return (parsing_multi_args(argv));
-		}
-        else
+			write(1, "Error\n", 6);
 			exit(0);
-        return (0);
+		}
+		return (parsing_string(argv));
+	}
+	else if (argc > 2)
+	{
+		if (!check_error_args(argv))
+		{
+			write(1, "Error\n", 6);
+			exit(0);
+		}
+		return (parsing_multi_args(argv));
+	}
+	else
+		exit(0);
+	return (0);
 }

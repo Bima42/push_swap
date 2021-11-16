@@ -16,7 +16,7 @@ CC				= gcc $(CFLAGS)
 
 RM				= rm -f
 
-CFLAGS			= -Wall -Wextra -Werror -g
+CFLAGS			= -Wall -Wextra -Werror
 
 NAME			= push_swap
 
@@ -25,7 +25,7 @@ NAME			= push_swap
 all:			$(NAME)
 
 $(NAME):		libft
-				$(CC) $(PUSH_SWAP_SRCS) $(HEAD_PUSH_SWAP) $(LIBFT_DIR)libft.a -o $(NAME)
+				$(CC) $(PUSH_SWAP_SRCS) -I $(HEAD_PUSH_SWAP) $(LIBFT_DIR)libft.a -o $(NAME)
 				@echo "Push_swap is ready !"
 
 libft:

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands_a.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 15:54:45 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:08:32 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void   sa(t_stack *a)
+void	sa(t_stack *a)
 {
-	int     tmp;
+	int	tmp;
 
 	tmp = 0;
 	if (a->front == a->tail || a->front == NULL)
@@ -16,7 +28,7 @@ void   sa(t_stack *a)
 	write(1, "sa\n", 3);
 }
 
-void    ra(t_stack *a)
+void	ra(t_stack *a)
 {
 	if (a->front != a->tail && a->front != NULL && a->tail != NULL)
 	{
@@ -48,32 +60,35 @@ void	rra(t_stack *a)
 		return ;
 }
 
-void   pa(t_stack *b, t_stack *a)
+void	pa(t_stack *b, t_stack *a)
 {
-        if (b->front == NULL)
-                return ;
-        if (a->front == NULL && a->tail == NULL)
-        {
-                a->front = b->front;
-                a->tail = b->front;
-                b->front = b->front->next;
-                b->front->prev = NULL;
-                a->front->next = NULL;
-        }
-        else if (a->front && a->tail && b->front->next)
-        {
-                a->front->prev = b->front;
-                b->front = b->front->next;
-                b->front->prev = NULL;
-                a->front->prev->next = a->front;
-                a->front = a->front->prev;
-        }
-        else if (!b->front->next)
-        {
-                a->front->prev = b->front;
-                b->front->next = a->front;
-                a->front = a->front->prev;
-                front_tail_null(b);
-        }
-        write(1, "pa\n", 3);
+	if (b->front == NULL)
+		return ;
+	if (a->front == NULL && a->tail == NULL)
+		push_empty(b, a);
+	else if (a->front && a->tail && b->front->next)
+	{
+		a->front->prev = b->front;
+		b->front = b->front->next;
+		b->front->prev = NULL;
+		a->front->prev->next = a->front;
+		a->front = a->front->prev;
+	}
+	else if (!b->front->next)
+	{
+		a->front->prev = b->front;
+		b->front->next = a->front;
+		a->front = a->front->prev;
+		front_tail_null(b);
+	}
+	write(1, "pa\n", 3);
+}
+
+void	push_empty(t_stack *b, t_stack *a)
+{
+	a->front = b->front;
+	a->tail = b->front;
+	b->front = b->front->next;
+	b->front->prev = NULL;
+	a->front->next = NULL;
 }

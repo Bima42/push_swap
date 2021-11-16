@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_long.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:45:51 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:47:50 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void   init_long(t_long *data, t_stack *a, int chunk)
+void	init_long(t_long *data, t_stack *a, int chunk)
 {
 	data->size = list_size(a->front);
 	data->min = get_min_data(a->front);
@@ -25,7 +37,7 @@ int	get_by(t_node *node, t_long data, int from)
 			if (node->data >= data.low && node->data <= data.high)
 				return (i);
 		if (node->data > data.low && node->data <= data.high)
-				return (i);
+			return (i);
 		i++;
 		node = node->next;
 	}
@@ -35,14 +47,14 @@ int	get_by(t_node *node, t_long data, int from)
 			if (node->data >= data.low && node->data <= data.high)
 				return (i);
 		if (node->data > data.low && node->data <= data.high)
-				return (i);
+			return (i);
 		i++;
 		node = node->prev;
 	}
 	return (0);
 }
 
-void   set_median_low(t_long *data, t_stack *a, int nb_chunk)
+void	set_median_low(t_long *data, t_stack *a, int nb_chunk)
 {
 	if (data->high != data->max)
 		data->to_front = get_next_min_data(data->high, a->front);
@@ -55,7 +67,7 @@ void   set_median_low(t_long *data, t_stack *a, int nb_chunk)
 	data->mult -= 1;
 }
 
-int   smart_way_long(t_stack *a, t_long data, int *step)
+int	smart_way_long(t_stack *a, t_long data, int *step)
 {
 	data.front = get_by(a->front, data, 1);
 	data.tail = get_by(a->tail, data, -1);
@@ -81,10 +93,10 @@ int   smart_way_long(t_stack *a, t_long data, int *step)
 	}
 }
 
-void collect(t_stack *a, t_stack *b, t_long data)
+void	collect(t_stack *a, t_stack *b, t_long data)
 {
-	int     way;
-	int     step;
+	int	way;
+	int	step;
 
 	way = 1;
 	step = 0;

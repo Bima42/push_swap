@@ -1,15 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands_both.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:10:05 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:18:36 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 void	swap_both(t_stack *a, t_stack *b)
 {
-	if (a->front && a->front->next
-			&& b->front && b->front->next)
-	{
-		sa(a);
-		sb(b);
-	}
-	else
+	int	tmp;
+	int	temp;
+
+	tmp = 0;
+	temp = 0;
+	if ((a->front == a->tail || a->front == NULL)
+		&& (b->front == b->tail || b->front == NULL))
 		return ;
+	else if (a->front && a->front->next && b->front && b->front->next)
+	{
+		tmp = a->front->data;
+		a->front->data = a->front->next->data;
+		a->front->next->data = tmp;
+		temp = b->front->data;
+		b->front->data = b->front->next->data;
+		b->front->next->data = temp;
+		write(1, "ss\n", 3);
+	}
 }
 
 void	front_tail_null(t_stack *a)
@@ -40,7 +62,8 @@ void	rr(t_stack *a, t_stack *b)
 	}
 	write(1, "rr\n", 3);
 }
-void    rrr(t_stack *a, t_stack *b)
+
+void	rrr(t_stack *a, t_stack *b)
 {
 	if (b->front != b->tail && b->front != NULL && b->tail != NULL)
 	{

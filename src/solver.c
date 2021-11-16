@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 16:31:00 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/16 16:34:31 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void   solver_short(t_stack *a)
+void	solver_short(t_stack *a)
 {
 	if (list_size(a->front) == 2 && !is_sorted(a))
-			sa(a);
+		sa(a);
 	else if (list_size(a->front) == 3 && !is_sorted(a))
 	{
 		if (is_reverse_sorted(a))
@@ -11,21 +23,25 @@ void   solver_short(t_stack *a)
 			sa(a);
 			rra(a);
 		}
-		else if (a->front->data > a->front->next->data && a->front->data > a->tail->data)
+		else if (a->front->data > a->front->next->data
+			&& a->front->data > a->tail->data)
 		{
 			ra(a);
 			if (!is_sorted(a))
 				sa(a);
 		}
-		else if (a->front->data < a->front->next->data && a->front->data < a->tail->data)
+		else if (a->front->data < a->front->next->data
+			&& a->front->data < a->tail->data)
 		{
 			ra(a);
 			sa(a);
 			rra(a);
 		}
-		else if (a->front->data > a->front->next->data && a->front->data < a->tail->data)
+		else if (a->front->data > a->front->next->data
+			&& a->front->data < a->tail->data)
 			sa(a);
-		else if (a->front->data < a->front->next->data && a->front->data > a->tail->data)
+		else if (a->front->data < a->front->next->data
+			&& a->front->data > a->tail->data)
 			rra(a);
 	}
 }
@@ -55,9 +71,9 @@ void	move_to(t_stack *a, t_stack *b, int median)
 
 void	solver_med(t_stack *a, t_stack *b)
 {
-	int min_data;
-	int max_data;
-	int median;
+	int	min_data;
+	int	max_data;
+	int	median;
 
 	min_data = get_min_data(a->front);
 	max_data = get_max_data(a->front);
@@ -66,14 +82,14 @@ void	solver_med(t_stack *a, t_stack *b)
 	if (list_size(a->front) <= 3)
 	{
 		solver_short(a);
-		while(!is_empty(b))
+		while (!is_empty(b))
 			pa(b, a);
 	}
 }
 
-void  solver_long(t_stack *a, t_stack *b, int nb_chunk)
+void	solver_long(t_stack *a, t_stack *b, int nb_chunk)
 {
-	t_long  data;
+	t_long	data;
 
 	init_long(&data, a, nb_chunk);
 	data.high = data.max;
@@ -86,10 +102,10 @@ void  solver_long(t_stack *a, t_stack *b, int nb_chunk)
 				ra(a);
 		resolve_chunk(a, b);
 		if (data.zone <= nb_chunk / 2)
-			while(a->tail->data != data.max)
+			while (a->tail->data != data.max)
 				ra(a);
 		else if (data.zone > nb_chunk / 2)
-			while(a->tail->data != data.max)
+			while (a->tail->data != data.max)
 				rra(a);
 		data.high = data.low;
 	}

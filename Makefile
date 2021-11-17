@@ -11,11 +11,11 @@ NAME		= push_swap
 
 SRCS_PATH	= src/
 
-MAIN		= solver.c push_swap.c
+MAIN		= push_swap.c
 
 CMD			= commands_a.c commands_b.c commands_both.c
 
-UTILS		= list_utils.c list_utils_2.c solver_utils.c utils_long.c utils_long_2.c
+UTILS		= solver.c list_utils.c list_utils_2.c solver_utils.c utils_long.c utils_long_2.c
 
 PARS		= parsing_utils.c create_elements.c push_swap_parsing.c
 
@@ -27,22 +27,22 @@ SRCS		= $(addprefix $(SRCS_PATH), $(MAIN)) \
 OBJS_PSWAP	= $(SRCS:.c=.o)
 
 
-all:	$(NAME)
+all:			$(NAME)
 
-$(OBJS_PSWAP): %.o: %.c
+$(OBJS_PSWAP): 	%.o: %.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) :	$(OBJS_PSWAP)
-			make -C $(LIBFT_PATH)
-			$(CC) -o $(NAME) $(OBJS_PSWAP) $(LINKS)
+$(NAME) :		$(OBJS_PSWAP)
+				make -C $(LIBFT_PATH)
+				$(CC) -o $(NAME) $(OBJS_PSWAP) $(LINKS)
 
 clean:
-		rm -rf $(SRCS:.c=.o)
-		make -C $(LIBFT_PATH) clean
+				rm -rf $(SRCS:.c=.o)
+				make -C $(LIBFT_PATH) clean
 
 fclean:	clean
-		rm -rf $(LIBFT_PATH)libft.a
-		rm -rf $(NAME)
+				rm -rf $(LIBFT_PATH)libft.a
+				rm -rf $(NAME)
 
 re:	fclean all
 

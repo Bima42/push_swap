@@ -1,42 +1,49 @@
-LIBFT_DIR		=	libft/
+CC			= gcc
+FLAGS		= -Wall -Wextra -Werror
+LIBFT_PATH 	= ./libft
+INCL		= ./src
 
-PUSH_SWAP_SRCS	=	$(addprefix src/, $(SRCS))
+CFLAGS		= $(FLAGS) -I$(LIBFT_PATH)/ -I$(INCL)/
 
-SRCS		=	push_swap.c solver.c \
-				parsing/push_swap_parsing.c parsing/create_elements.c parsing/parsing_utils.c \
-                commands/commands_a.c commands/commands_b.c commands/commands_both.c \
-                utils/list_utils.c utils/list_utils_2.c \
-				utils/utils_long.c utils/utils_long_2.c utils/solver_utils.c
+LINKS		= -L $(LIBFT_PATH) -lft
 
-HEAD_PUSH_SWAP	= src/
+NAME		= push_swap
 
-OBJS_PUSH_SWAP	=	$(addprefix src/, $(SRCS:.c=.o))
+SRCS_PATH	= src/
 
-CC				= gcc $(CFLAGS)
+MAIN		= solver.c push_swap.c
 
-RM				= rm -f
+CMD			= commands_a.c commands_b.c commands_both.c
 
-CFLAGS			= -Wall -Wextra -Werror
+UTILS		= list_utils.c list_utils_2.c solver_utils.c utils_long.c utils_long_2.c
 
-NAME			= push_swap
+PARS		= parsing_utils.c create_elements.c push_swap_parsing.c
 
-.PHONY:			libft all clean fclean re bonus
+SRCS		= $(addprefix $(SRCS_PATH), $(MAIN)) \
+				  $(addprefix $(SRCS_PATH)commands/, $(CMD)) \
+				  $(addprefix $(SRCS_PATH)utils/, $(UTILS)) \
+				  $(addprefix $(SRCS_PATH)parsing/, $(PARS))
 
-all:			$(NAME)
+OBJS_PSWAP	= $(SRCS:.c=.o)
 
-$(NAME):		libft
-				$(CC) $(PUSH_SWAP_SRCS) -I $(HEAD_PUSH_SWAP) $(LIBFT_DIR)libft.a -o $(NAME)
-				@echo "Push_swap is ready !"
 
-libft:
-				make -C $(LIBFT_DIR) all
+all:	$(NAME)
+
+$(OBJS_PSWAP): %.o: %.c
+				$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME) :	$(OBJS_PSWAP)
+			make -C $(LIBFT_PATH)
+			$(CC) -o $(NAME) $(OBJS_PSWAP) $(LINKS)
 
 clean:
-				$(RM) $(OBJS_PUSH_SWAP)
-				make -C $(LIBFT_DIR) clean
+		rm -rf $(SRCS:.c=.o)
+		make -C $(LIBFT_PATH) clean
 
-fclean:			clean
-				$(RM) $(NAME)
-				make -C $(LIBFT_DIR) fclean
+fclean:	clean
+		rm -rf $(LIBFT_PATH)libft.a
+		rm -rf $(NAME)
 
-re:				fclean $(NAME)
+re:	fclean all
+
+.PHONY : all re clean fclean

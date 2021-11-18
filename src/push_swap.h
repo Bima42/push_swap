@@ -128,6 +128,7 @@ void	rr_decision(t_stack *a, t_stack *b, t_chunk chunk);
 //Solver_utils
 void	solver_shorter(t_stack *a, int flag);
 int		collect_decision(t_stack *b, t_long data);
+int     determine_chunk(t_stack *a);
 void	free_elements(t_stack *a, t_stack *b);
 
 #endif

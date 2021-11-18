@@ -61,3 +61,31 @@ void	free_elements(t_stack *a, t_stack *b)
 		free(b->front);
 	}
 }
+
+int	determine_chunk(t_stack *a)
+{
+	int	size;
+	int	chunk;
+
+	chunk = 1;
+	size = list_size(a->front);
+	if (size < 25)
+		return (chunk);
+	else if (size <= 50)
+		return (++chunk);
+	else if (size <= 100)
+		return (4);
+	else if (size <= 200)
+		return (5);
+	else if (size <= 300)
+		return (6);
+	else if (size <= 400)
+		return (7);
+	else if (size <= 500)
+		return (8);
+	else if (size <= 1000)
+		return (12);
+	else if (size >= 1000)
+		return (16);
+	exit(0);
+}
